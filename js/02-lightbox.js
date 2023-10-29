@@ -2,21 +2,13 @@ import { galleryItems } from './gallery-items.js';
 
 const gallery = document.querySelector('.gallery');
 galleryItems.forEach(item => {
-    const galleryItem = document.createElement('li');
-    const galleryLink = document.createElement('link');
-    const galleryImage = document.createElement('img');
+    const galleryItem = `<li class="gallery__item">
+    <a class="gallery__link" href="${item.original}">
+        <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
+    </a>
+    </li>`;
 
-    galleryImage.src = item.preview;
-    galleryImage.alt = item.description;
-    galleryImage.classList.add('gallery__image');
-    galleryItem.classList.add('gallery__item');
-
-    galleryLink.href = item.original;
-    galleryLink.classList.add('gallery__link');
-    
-    galleryLink.appendChild(galleryImage);
-    galleryItem.appendChild(galleryLink);
-    gallery.appendChild(galleryItem);
+    gallery.insertAdjacentHTML("afterBegin", galleryItem);
 })
 
 let lightbox = new SimpleLightbox('.gallery__link', { 
